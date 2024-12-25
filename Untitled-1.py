@@ -17,7 +17,7 @@ def get_birthdate():
             year = int(input("Введите год рождения (например, 1990): "))
 
             if 1 <= day <= 31 and 1 <= month <= 12:
-                birthdate = f"{day}.{month}.{year}"
+                birthdate = f"{day}.{month:02}.{year}"
                 return birthdate
             else:
                 print("Некорректный ввод данных. Попробуйте ещё раз.")
@@ -36,8 +36,96 @@ def calculate_age(birthdate):
     age = today.year - birthdate_obj.year - ((today.month, today.day) < (birthdate_obj.month, birthdate_obj.day))
     return age
 
+digits = {
+    '0': [
+        " *** ",
+        "*   *",
+        "*   *",
+        "*   *",
+        " *** "
+    ],
+    '1': [
+        "  *  ",
+        " **  ",
+        "  *  ",
+        "  *  ",
+        "*****"
+    ],
+    '2': [
+        " *** ",
+        "*   *",
+        "   * ",
+        "  *  ",
+        "*****"
+    ],
+    '3': [
+        " *** ",
+        "*   *",
+        "   **",
+        "*   *",
+        " *** "
+    ],
+    '4': [
+        "   * ",
+        "  ** ",
+        " * * ",
+        "*****",
+        "   * "
+    ],
+    '5': [
+        "*****",
+        "*    ",
+        "**** ",
+        "    *",
+        "**** "
+    ],
+    '6': [
+        " *** ",
+        "*    ",
+        "**** ",
+        "*   *",
+        " *** "
+    ],
+    '7': [
+        "*****",
+        "    *",
+        "   * ",
+        "  *  ",
+        " *   "
+    ],
+    '8': [
+        " *** ",
+        "*   *",
+        " *** ",
+        "*   *",
+        " *** "
+    ],
+    '9': [
+        " *** ",
+        "*   *",
+        " ****",
+        "    *",
+        " *** "
+    ],
+    '.': [
+        "     ",
+        "     ",
+        "     ",
+        "     ",
+        "  *  "
+    ]
+}
+
+def print_number(number):
+    for row in range(5): 
+        line = ""
+        for digit in str(number):
+            if digit in digits:
+                line += digits[digit][row] + "  " 
+        print(line)
+
 birthdate = get_birthdate()
-print(f"Ваша дата рождения: **.**.****")
+print_number(birthdate)
 weekday = get_weekday(birthdate)
 print(f"День недели вашего дня рождения: {weekday}")
 age = calculate_age(birthdate)
